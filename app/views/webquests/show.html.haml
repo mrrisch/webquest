@@ -1,0 +1,7 @@
+%h1= @webquest.name
+%p= @webquest.beschreibung
+%p= @webquest.fach
+
+= link_to "Zurück", root_path
+= link_to "Aktualisieren", edit_webquest_path
+= link_to "Löschen", webquest_path, method: :delete, data: {confirm: "Sind Sie sicher?"}

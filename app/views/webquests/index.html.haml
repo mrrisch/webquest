@@ -1,0 +1,5 @@
+= link_to "Neuer Webquest", new_webquest_path
+
+-@webquests.each do |webquest|
+	%h2= link_to webquest.name, webquest
+	

@@ -1,0 +1,2 @@
+module WebquestsHelper
+end
