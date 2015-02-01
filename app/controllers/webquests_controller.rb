@@ -1,19 +1,25 @@
 class WebquestsController < ApplicationController
 	before_action :find_webquest, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_lehrer!, except: [:index, :show]
 
 	def index
-		@webquests = Webquest.all.order("created_at DESC")
+		if params[:fach].blank?
+			@webquests = Webquest.all.order("created_at DESC")
+		else
+			@fach_id = Fach.find_by(name: params[:fach]).id
+			@webquests = Webquest.where(fach_id: @fach_id).order("created_at DESC")
+		end
 	end
 
 	def show
 	end
 
 	def new
-		@webquest = Webquest.new
+		@webquest = current_lehrer.webquests.build
 	end
 
 	def create 
-		@webquest = Webquest.new(webquest_params)
+		@webquest = current_lehrer.webquests.build(webquest_params)
 
 		if @webquest.save 
 			redirect_to @webquest, notice: "Ihr Webquest wurde erfolgreich erstellt"
@@ -42,7 +48,7 @@ class WebquestsController < ApplicationController
 	private
 
 	def webquest_params
-		params.require(:webquest).permit(:name, :beschreibung, :fach)
+		params.require(:webquest).permit(:name, :beschreibung, :fach, :image, :fach_id, :anhang)
 	end
 
 	def find_webquest

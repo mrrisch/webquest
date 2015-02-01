@@ -6,6 +6,44 @@
 	= javascript_include_tag 'application', 'data-turbolinks-track' => true
 	= csrf_meta_tags
 %body
-	=yield
+	%nav.navbar.navbar-default
+		.container
+			.navbar-brand= link_to "WebQuest", root_path
+
+			- if lehrer_signed_in?
+				%ul.nav.navbar-nav.navbar-right
+					%li= link_to "Neuer WebQuest", new_webquest_path
+					%li= link_to "Mein Profil", edit_lehrer_registration_path
+					%li= link_to "Abmelden", destroy_lehrer_session_path , method: :delete
+			- else 
+				%ul.nav.navbar-nav.navbar-right
+					%li= link_to "Registrierung", new_lehrer_registration_path
+					%li= link_to "Anmelden", new_lehrer_session_path
+	
+	%nav.navbar.navbar-default
+		.container
+			%ul.nav.navbar-nav.navbar-right
+				%li=link_to "Alle Webquests", root_path	
+				-Fach.all.each do |fach|
+					%li=link_to fach.name, webquests_path(fach: fach.name)
+
+	.container
+		- flash.each do |name, msg|
+			= content_tag :div, msg, class:"alert alert-info"
+		=yield
+
+	%footer
+		.container
+			.col-md-4
+				%p Made with <3 by Autori Agentur
+			.col-md-8
+				%ul.nav.navbar-nav.navbar-right
+					%li= link_to 'Was ist Webquest?', page_path('webquest')
+					%li= link_to 'Hintergrund', page_path('hintergrund')
+					%li= link_to 'Über das Projekt', page_path('projekt')
+					%li= link_to 'Impressum', page_path('impressum')
+
+
+
 
 

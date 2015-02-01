@@ -1,5 +1,11 @@
-%h1 Aktualisierung des Webquests
+.col-md-6.col-md-offset-3
+	.row
+		.panel.panel-default
+			.panel-heading
+				%h1 Aktualisierung des Webquests
+			.panel-body
+				%strong.center Aktuelles Bild
+				%br/ 
+				= image_tag @webquest.image.url(:medium)
 
-= render 'form'
-
-= link_to "Abbrechen", webquest_path
+				= render 'form'

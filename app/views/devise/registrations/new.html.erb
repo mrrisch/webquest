@@ -1,0 +1,32 @@
+<div class="col-md-6 col-md-offset-3">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>Registrierung</h2>
+			</div>
+
+			<div class="panel-body">
+
+
+				<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+				  <%= f.error_notification %>
+
+				  <div class="form-group">
+				    <%= f.input :email, required: true, autofocus: true %>
+				    <%= f.input :vorname, required:true %>
+				    <%= f.input :name, required:true %>
+				    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} Zeichen minimale Passwortlänge" if @validatable) %>
+				    <%= f.input :password_confirmation, required: true %>
+				  </div>
+
+				  <div class="form-actions">
+				    <%= f.button :submit, "Registrieren", class: "btn, btn-primary" %>
+				  </div>
+				<% end %>
+
+				<%= render "devise/shared/links" %>
+				
+			</div>
+		</div>
+	</div>
+</div>

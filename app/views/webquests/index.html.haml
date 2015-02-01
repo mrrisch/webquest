@@ -1,5 +1,10 @@
-= link_to "Neuer Webquest", new_webquest_path
-
--@webquests.each do |webquest|
-	%h2= link_to webquest.name, webquest
-	
+#pins.transitions-enabled
+	- @webquests.each do  |webquest|
+		.box.panel.panel-default
+			= link_to (image_tag webquest.image.url), webquest
+			.panel-body
+			%h2= link_to webquest.name, webquest
+			%p.user
+				Erstellt von
+				=webquest.lehrer.vorname 
+				=webquest.lehrer.name 
