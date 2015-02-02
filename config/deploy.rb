@@ -4,6 +4,27 @@ lock '3.3.5'
 set :application, 'my_app_name'
 set :repo_url, 'git@example.com:me/my_repo.git'
 
+# include uberspacify base recipes
+require 'uberspacify/base'
+
+# comment this if you don't use MySQL
+#require 'uberspacify/mysql' 
+
+# the Uberspace server you are on
+server 'diphda.uberspace.de', :web, :app, :db, :primary => true
+
+# your Uberspace username
+set :user, 'stephanr'
+
+# a name for your app, [a-z0-9] should be safe, will be used for your gemset,
+# databases, directories, etc.
+set :application, 'webquest'
+
+# the repo where your code is hosted
+set :scm, :git
+set :repository, 'https://github.com/mrrisch/webquest.git'
+
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
