@@ -27,4 +27,5 @@ require 'capistrano/deploy'
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }
 
 #added manually 
-Rake::Task[:production].invoke
+#Rake::Task[:production].invoke
+invoke :production
